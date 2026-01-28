@@ -1,0 +1,28 @@
+name: Clinic Automated Testing
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore ClinicSolution
+
+    - name: Build
+      run: dotnet build ClinicSolution --no-restore
+
+    - name: Test
+      run: dotnet test ClinicSolution --no-build --verbosity normal
