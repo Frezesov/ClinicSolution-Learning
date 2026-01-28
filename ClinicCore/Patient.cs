@@ -12,7 +12,7 @@
 
             if (BirthDate.Date > today.AddYears(-age))
             {
-                age--;
+                age++;
             }
 
             return age;
